@@ -1,6 +1,7 @@
 # HTest框架
 
 把HTest文件夹复制到本电脑所安装的对应版本的python目录下
+
 cp ./HTest /usr/lib/python3.7/
 
 在被测项目Project下创建相对应的文件目录，参考HTest/content/项目目录.png
