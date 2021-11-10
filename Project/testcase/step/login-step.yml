@@ -1,0 +1,14 @@
+config:
+    name: login-step
+    driver: HTest
+    driver-args:
+    info: 登陆功能
+
+# 步骤设计
+step-list:
+    # [函数，元素定位方式， 元素定位内容， 输入参数]
+    - [hs-input, $path, $pathname, $username]
+    - [hs-input, $path, $pathname, $password]
+    - [hs-click, $path, $pathname]
+    - [hs-check, $path, $pathname, $check]
+
