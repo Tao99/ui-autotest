@@ -9,10 +9,22 @@ class Getyaml:
         self.path = filepath
 
     def get_yaml(self):
+        """
+        读取yaml文件
+        :return:
+        """
         f = open(self.path, encoding='utf-8')
         data = yaml.load(f, Loader=yaml.FullLoader)
         f.close()
         return data
+
+    def write_yaml(self, data):
+        """
+        写入yaml文件
+        :param data: [{'database': 'Hs-api', 'port': 21020}, {'url': 'www.baidu.com'}]
+        """
+        with open(self.path, encoding='utf-8', mode='w') as f:
+            yaml.dump(data, stream=f, allow_unicode=True)
 
     def alldata(self):
         data = self.get_yaml()

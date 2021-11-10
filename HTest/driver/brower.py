@@ -1,8 +1,7 @@
 import configparser
 import os
 from selenium import webdriver
-from HTest.logger import Logger
-logger = Logger()
+from HTest.logger import logger
 
 
 class Browser(object):

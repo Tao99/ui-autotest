@@ -5,15 +5,15 @@ from .runner import Runner
 from .HTMLTestRunner import HTMLTestRunner
 from .basepage import BasePage
 from .loader import Loader
-from .logger import Logger
-from .read_excel import ReadExcel
+from .logger import logger
+from .get_excel import read_excel, write_excel
 from .operate import yamlPage
 from .send_email import send_email
 from .new_report import new_report
 
 
-__all__ = ['BasePage', 'Loader', 'Runner', 'yamlPage', 'new_report',
-           'HTMLTestRunner', 'send_email', 'Logger', 'ReadExcel']
+__all__ = ['BasePage', 'Loader', 'Runner', 'yamlPage', 'new_report', 'write_excel',
+           'HTMLTestRunner', 'send_email', 'logger', 'read_excel']
 
 # Expose obsolete functions for backwards compatibility
 
