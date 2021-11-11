@@ -1,0 +1,25 @@
+[2021-11-11 17:08:06,251] [logger.py|__console] [line:35] INFO    : Had type ' l.tao ' in inputBox
+[2021-11-11 17:08:06,521] [logger.py|__console] [line:35] INFO    : Had type ' Aa1234567 ' in inputBox
+[2021-11-11 17:08:06,691] [logger.py|__console] [line:35] INFO    : The element ' 登录 ' was clicked.
+[2021-11-11 17:08:09,695] [logger.py|__console] [line:36] DEBUG   : 测试的用例是:case1 ; 用户名: l.tao ; 密码: Aa1234567
+[2021-11-11 17:08:09,696] [logger.py|__console] [line:34] INFO    : 该条测试用例的执行结果是: 密码错误，登录失败
+[2021-11-11 17:08:14,273] [logger.py|__console] [line:35] INFO    : Had type ' w.tao ' in inputBox
+[2021-11-11 17:08:14,477] [logger.py|__console] [line:35] INFO    : Had type ' Aa123456 ' in inputBox
+[2021-11-11 17:08:14,644] [logger.py|__console] [line:35] INFO    : The element ' 登录 ' was clicked.
+[2021-11-11 17:08:17,647] [logger.py|__console] [line:36] DEBUG   : 测试的用例是:case2 ; 用户名: w.tao ; 密码: Aa123456
+[2021-11-11 17:08:17,648] [logger.py|__console] [line:34] INFO    : 该条测试用例的执行结果是: 用户名错误，登录失败
+[2021-11-11 17:08:24,642] [logger.py|__console] [line:35] INFO    : Had type ' None ' in inputBox
+[2021-11-11 17:08:24,865] [logger.py|__console] [line:35] INFO    : Had type ' Aa123456 ' in inputBox
+[2021-11-11 17:08:25,147] [logger.py|__console] [line:35] INFO    : The element ' 登录 ' was clicked.
+[2021-11-11 17:08:28,151] [logger.py|__console] [line:36] DEBUG   : 测试的用例是:case3 ; 用户名: None ; 密码: Aa123456
+[2021-11-11 17:08:28,152] [logger.py|__console] [line:34] INFO    : 该条测试用例的执行结果是: 登录失败，用户名不能为空
+[2021-11-11 17:08:34,838] [logger.py|__console] [line:35] INFO    : Had type ' l.tao ' in inputBox
+[2021-11-11 17:08:35,137] [logger.py|__console] [line:35] INFO    : Had type ' None ' in inputBox
+[2021-11-11 17:08:35,330] [logger.py|__console] [line:35] INFO    : The element ' 登录 ' was clicked.
+[2021-11-11 17:08:38,331] [logger.py|__console] [line:36] DEBUG   : 测试的用例是:case4 ; 用户名: l.tao ; 密码: None
+[2021-11-11 17:08:38,332] [logger.py|__console] [line:34] INFO    : 该条测试用例的执行结果是: 登录失败，密码不能为空
+[2021-11-11 17:08:42,625] [logger.py|__console] [line:35] INFO    : Had type ' l.tao ' in inputBox
+[2021-11-11 17:08:42,834] [logger.py|__console] [line:35] INFO    : Had type ' Aa123456 ' in inputBox
+[2021-11-11 17:08:42,987] [logger.py|__console] [line:35] INFO    : The element ' 登录 ' was clicked.
+[2021-11-11 17:08:45,991] [logger.py|__console] [line:36] DEBUG   : 测试的用例是:case5 ; 用户名: l.tao ; 密码: Aa123456
+[2021-11-11 17:08:45,992] [logger.py|__console] [line:34] INFO    : 该条测试用例的执行结果是: 登录成功
