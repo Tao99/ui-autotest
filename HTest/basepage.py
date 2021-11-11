@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 import os.path
 from selenium.webdriver.support.wait import WebDriverWait
-from HTest.logger import logger
+from logger import logger
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.keys import Keys
 from random import choice
@@ -69,7 +69,7 @@ class BasePage(object):
             self.driver.close()
             logger.info("Closing and quit the browser.")
         except NameError as e:
-            logger.info("Failed to quit the browser with %s" % e)
+            logger.error("Failed to quit the browser with %s" % e)
 
     def quit(self):
         """
@@ -182,7 +182,7 @@ class BasePage(object):
         try:
             ActionChains(self.driver).double_click(element).perform()
         except Exception as e:
-            logger.info("Failed to double_click the element with %s" % e)
+            logger.error("Failed to double_click the element with %s" % e)
             self.take_screenshot()
             raise
 

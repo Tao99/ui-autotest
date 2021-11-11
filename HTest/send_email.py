@@ -2,6 +2,7 @@
 # _*_ coding:utf-8 _*_
 # order by taolei
 import os
+from logger import logger
 from HTest import setting, new_report
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -56,7 +57,7 @@ def send_email(file):
     smtp.login(username_send, username_code)
     smtp.sendmail(username_send, ','.join(username_received), email.as_string())
     smtp.quit()
-    print("测试报告已发送成功")
+    logger.info("测试报告已发送成功")
 
 
 if __name__ == '__main__':

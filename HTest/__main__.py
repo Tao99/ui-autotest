@@ -19,8 +19,8 @@ else:
     print(file)
     if file_suffix in ['.yaml', '.yml']:
         if os.path.isfile(sys.argv[1]):
-            from HTest.run_yaml import main
-            main().Run_yaml()
+            from HTest.run_yaml import test_yaml
+            test_yaml()
         else:
             print("E" + "\n" + "======================================================================" + "\n" +
                   "ERROR: " + sys.argv[1] + "\n" + "FileNotFoundError: No file named %s" % sys.argv[1].split("/")[-1])

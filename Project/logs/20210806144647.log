@@ -1,9 +1,0 @@
-[2021-08-06 14:46:51,806] [logger.py|__console] [line:35] INFO    : Had type ' l.tao ' in inputBox
-[2021-08-06 14:46:51,995] [logger.py|__console] [line:35] INFO    : Had type ' Aa1234567 ' in inputBox
-[2021-08-06 14:46:52,138] [logger.py|__console] [line:35] INFO    : The element ' 登录 ' was clicked.
-[2021-08-06 14:46:59,268] [logger.py|__console] [line:35] INFO    : Had type ' w.tao ' in inputBox
-[2021-08-06 14:46:59,455] [logger.py|__console] [line:35] INFO    : Had type ' Aa123456 ' in inputBox
-[2021-08-06 14:46:59,601] [logger.py|__console] [line:35] INFO    : The element ' 登录 ' was clicked.
-[2021-08-06 14:47:06,688] [logger.py|__console] [line:35] INFO    : Had type ' l.tao ' in inputBox
-[2021-08-06 14:47:06,873] [logger.py|__console] [line:35] INFO    : Had type ' Aa123456 ' in inputBox
-[2021-08-06 14:47:07,006] [logger.py|__console] [line:35] INFO    : The element ' 登录 ' was clicked.

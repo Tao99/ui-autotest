@@ -70,3 +70,9 @@ class Logger(object):
 
 
 logger = Logger()
+
+if __name__ == '__main__':
+    logger.info(123)
+    logger.debug(123)
+    logger.warning(123)
+    logger.error(123)

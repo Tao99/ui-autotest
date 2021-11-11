@@ -11,7 +11,7 @@ url: 'http://o.hang-shu.com/zentaopms/www/index.php'
 main-list:
    - [case1, l.tao, Aa1234567, 密码错误，登录失败]
    - [case2, w.tao, Aa123456, 用户名错误，登录失败]
-   - [case3, null, Aa123456, 登录失败，用户名不能为空]
-   - [case4, l.tao, null, 登录失败，密码不能为空]
+   - [case3, None, Aa123456, 登录失败，用户名不能为空]
+   - [case4, l.tao, None, 登录失败，密码不能为空]
    - [case5, l.tao, Aa123456, 登录成功]
 

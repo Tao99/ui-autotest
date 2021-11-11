@@ -27,11 +27,6 @@ def run_case(case):
     send_email(report)  # 调用发送邮件模块
 
 
-class main(unittest.TestCase):
-    def Run_yaml(self):
-        self.case = add_case_yaml()
-        run_case(self.case)
-
-
-if __name__ == '__main__':
-    unittest.main()
+def test_yaml():
+    case = add_case_yaml()
+    run_case(case)

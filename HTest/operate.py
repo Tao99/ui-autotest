@@ -8,6 +8,8 @@ from HTest.get_yaml import Getyaml
 from ddt import ddt, data, unpack
 from selenium import webdriver
 from HTest import setting, BasePage
+from logger import logger
+
 
 url = setting.URL
 path_case = os.path.join(setting.TEST_CASE_YAML_CASE)
@@ -16,8 +18,14 @@ data_suit = Getyaml(path_suit).get_yaml().get("main-list")
 data_case = Getyaml(path_case).get_yaml().get("case-list")
 
 
-@ddt   # value = value.split(',')[0].replace("'", "")  # 修改用例名过长的问题，在ddt.py中的mk_test_name方法中添加在倒数第三行
+@ddt
 class yamlPage(unittest.TestCase):
+    """
+    value = value.split(',')[0].replace("'", "")
+    修改用例名过长的问题
+    在ddt.py中的mk_test_name方法中添加在倒数第三行
+
+    """
     def setUp(self) -> None:
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
@@ -28,7 +36,8 @@ class yamlPage(unittest.TestCase):
     @data(*data_suit)
     @unpack
     def test_yml(self, args, username, password, check):
-        for i in range(1, len(data_case)):
+        logger.debug("测试的用例是:{0} ; 用户名: {1} ; 密码: {2}".format(args, username, password))
+        for i in range(1, len(data_case)):          
             if data_case[i][0] == "hs-input":
                 if data_case[i][1] == "id":
                     if "username" in data_case[i][3]:
@@ -53,8 +62,7 @@ class yamlPage(unittest.TestCase):
                 if data_case[i][1] == "xpath":
                     self.BasePage.click(By.XPATH, data_case[i][2])
                 time.sleep(3)
-        print("测试的用例是:{0} ; 用户名: {1} ; 密码: {2}".format(args, username, password))
-        print("该条测试用例的执行结果是: " + check)
+        logger.info("该条测试用例的执行结果是: " + check)
 
     def tearDown(self) -> None:
         self.driver.quit()
