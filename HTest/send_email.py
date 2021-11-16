@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
-# order by taolei
+# 发送邮件
 import os
-from logger import logger
+from .logger import logger
 from HTest import setting, new_report
 import smtplib
 from email.mime.multipart import MIMEMultipart

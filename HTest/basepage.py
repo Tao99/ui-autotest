@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 import os.path
 from selenium.webdriver.support.wait import WebDriverWait
-from logger import logger
+from .logger import logger
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.keys import Keys
 from random import choice
@@ -186,7 +186,6 @@ class BasePage(object):
             self.take_screenshot()
             raise
 
-    #
     def switch_iframe(self, selector):
         """
         切到iframe
@@ -285,7 +284,7 @@ class BasePage(object):
 
     def take_screenshot(self):
         """
-        截图，保存在根目录下的screenshots
+        截图，保存在根目录下的content/screenshots
         :return:
         """
         screen_dir = os.path.dirname(os.path.abspath('./content')) + '/screenshots/'

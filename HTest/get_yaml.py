@@ -1,5 +1,6 @@
 #!/usr/bin/env python3.7
 # _*_ coding:utf-8 _*_
+# 读取yaml文件
 import pprint
 import yaml
 
@@ -11,7 +12,8 @@ class Getyaml:
     def get_yaml(self):
         """
         读取yaml文件
-        :return:
+        :return: Dict
+        order by taolei
         """
         f = open(self.path, encoding='utf-8')
         data = yaml.load(f, Loader=yaml.FullLoader)
@@ -32,12 +34,12 @@ class Getyaml:
 
     def caselen1(self):
         data = self.alldata()
-        length = len (data)
+        length = len(data)
         return length
 
     def caselen(self, j):
         data = self.alldata()
-        length = len (data[j]['test']['testcase'])
+        length = len(data[j]['test']['testcase'])
         return length
 
     def get_title(self, j):
@@ -71,6 +73,7 @@ class Getyaml:
         else:
             pass
 
+
 if __name__ == '__main__':
     f = "../Project/test_py/login_case.yml"
     data = Getyaml(f).get_yaml()
@@ -78,4 +81,3 @@ if __name__ == '__main__':
     pprint.pprint(data.text)
     print(Getyaml(f).caselen1())
     print(f)
-

@@ -8,7 +8,7 @@ from HTest.get_yaml import Getyaml
 from ddt import ddt, data, unpack
 from selenium import webdriver
 from HTest import setting, BasePage
-from logger import logger
+from .logger import logger
 
 
 url = setting.URL
@@ -24,7 +24,7 @@ class yamlPage(unittest.TestCase):
     value = value.split(',')[0].replace("'", "")
     修改用例名过长的问题
     在ddt.py中的mk_test_name方法中添加在倒数第三行
-
+    order by taolei
     """
     def setUp(self) -> None:
         self.driver = webdriver.Chrome()
