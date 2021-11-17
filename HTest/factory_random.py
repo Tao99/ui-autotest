@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.7
 # encoding: utf-8
-# @Desc  : 随机数据生成库
+# 随机数据生成库
 import random
 import string
 import time
