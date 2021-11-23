@@ -1,0 +1,11 @@
+selenium~=3.141.0
+ddt~=1.4.2
+PyYAML~=5.4.1
+openpyxl~=3.0.9
+pytesseract~=0.3.8
+Pillow~=5.4.1
+PyAutoGUI~=0.9.53
+opencv-python~=4.5.4.58
+numpy~=1.21.3
+Faker~=9.8.2
+setuptools~=40.8.0
