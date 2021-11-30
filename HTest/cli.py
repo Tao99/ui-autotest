@@ -2,8 +2,9 @@
 # _*_ coding:utf-8 _*_
 # 创建项目目录
 import argparse
-import os
-from HTest import logger
+import os, sys
+from logger import logger
+sys.path.append(os.path.dirname(__file__))
 
 
 def create_scaffold(project_path):
@@ -50,7 +51,7 @@ def main_HTest():
         help="show version")
     parser.add_argument(
         '-s', '--startproject',
-        help="Specify new project name.")
+        help="Specify new project name")
 
     args = parser.parse_args()
 
@@ -65,5 +66,5 @@ def main_HTest():
         return project_path
 
     else:
-        logger.error(args)
+        logger.error("Please specify new project name first")
         exit(0)

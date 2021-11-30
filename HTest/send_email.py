@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
 # 发送邮件
-import os
-from .logger import logger
+import os, sys
+from logger import logger
 from HTest import setting, new_report
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -10,6 +10,7 @@ from email.mime.text import MIMEText
 from email import encoders
 from email.mime.base import MIMEBase
 from email.header import Header
+sys.path.append(os.path.dirname(__file__))
 
 
 def send_email(file):
@@ -33,7 +34,6 @@ def send_email(file):
     encoders.encode_base64(att1)
     email.attach(att1)
     """
-
 
     # 构造MIMEMultipart对象做为根容器
     email = MIMEMultipart()

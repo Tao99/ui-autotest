@@ -3,8 +3,7 @@
 # order by taolei
 import time
 import unittest
-from HTest import setting
-import HTest
+from HTest import setting, yamlPage, HTMLTestRunner
 
 
 # 加载所在目录下py文件
@@ -19,7 +18,7 @@ def add_case_py(test_path=setting.TEST_CASE_PY, result=True):
 # 加载yaml格式的测试用例
 def add_case_yaml():
     suite = unittest.TestSuite()
-    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(HTest.yamlPage))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(yamlPage))
     return suite
 
 
@@ -27,8 +26,8 @@ def run_case(case):
     now = time.strftime("%Y%m%d%H%M%S")
     filename = setting.TEST_REPORT + '/' + now + '.html'
     fp = open(filename, 'w', encoding='utf-8')
-    runner = HTest.HTMLTestRunner(stream=fp, title='自动化测试报告', description='运行环境：Linux deepin， 浏览器：Chrome',
-                                  verbosity=2, tester='Tao lei')
+    runner = HTMLTestRunner(stream=fp, title='自动化测试报告', description='运行环境：Linux deepin， 浏览器：Chrome',
+                            verbosity=2, tester='Tao lei')
     runner.run(case)
 
 

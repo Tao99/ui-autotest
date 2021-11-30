@@ -1,13 +1,15 @@
 config:
-  name: login-suit
-  driver: HTest
-  driver-args:
-  info: 禅道登陆用例集合
+  name: login-suit    # 测试用例集名称
+  driver: HTest       # 测试驱动
+  driver-args:        # 其他引用
+  info: 禅道登陆用例集合 # 用例集合描述
 
+# 调用的测试用例模板
 import: [login-case]
+# 测试url地址
 url: 'http://o.hang-shu.com/zentaopms/www/index.php'
 
-# 用例集合
+# 用例集合，设计五条测试用例
 main-list:
    - [case1, l.tao, Aa1234567, 密码错误，登录失败]
    - [case2, w.tao, Aa123456, 用户名错误，登录失败]

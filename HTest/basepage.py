@@ -1,15 +1,16 @@
 #!/usr/bin/env python3.7
 # encoding: utf-8
-# @Desc  : 二次封装常用函数库
+# 二次封装常用函数库
 import time
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-import os.path
+import os, sys
 from selenium.webdriver.support.wait import WebDriverWait
-from .logger import logger
+from HTest.logger import logger
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.keys import Keys
 from random import choice
+sys.path.append(os.path.dirname(__file__))
 
 
 class BasePage(object):
@@ -92,7 +93,7 @@ class BasePage(object):
         except AttributeError:
             logger.error("{0}页面中未能找到{1}元素".format(self, selector))
 
-    def input(self, *selector, text):
+    def input(self, text, *selector):
         """
         输入字符
         :param selector:

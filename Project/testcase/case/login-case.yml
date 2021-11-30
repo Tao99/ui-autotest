@@ -4,13 +4,13 @@ config:
   driver-args: H5-ui
   info: 禅道登陆
 
+# 调用的测试步骤模板
 import: [login-step]
-url: 'http://o.hang-shu.com/zentaopms/www/index.php'
 
-# 用例执行
+# 用例执行，定义hs-input为输入标识，hs-click为点击标识，hs-check为验证标识
 case-list:
-  - [args, $username, $password, $check]
-  - [hs-input, id, account, $username]
-  - [hs-input, name, password, $password]
-  - [hs-click, id, submit]
-  - [hs-check, $check]
+  - [args, $username, $password, $check]   # 测试用例总览
+  - [hs-input, id, account, $username]     # 输入用户名
+  - [hs-input, name, password, $password]  # 输入密码
+  - [hs-click, id, submit]                 # 点击登陆
+  - [hs-check, $check]                     # 校验

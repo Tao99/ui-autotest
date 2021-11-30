@@ -7,7 +7,7 @@ import openpyxl
 class Getexcel:
     def __init__(self, filepath):
         self.path = filepath
-        
+
     def read_excel(self):
         """
         读取Excel文件
@@ -25,8 +25,7 @@ class Getexcel:
                 row_list.append(cell.value)
             sheet_list.append(row_list)
         return sheet_list
-    
-    
+
     def write_excel(self, data: list):
         """
         按行写入excel文件
