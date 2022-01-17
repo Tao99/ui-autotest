@@ -1,7 +1,7 @@
 # HTest框架
 
 
-下载安装：pip install HTest
+下载安装：pip3 install HTest
 
 > 使用方法：
 
@@ -11,20 +11,20 @@
 
 （3）帮助：hs -h
 
-
-> 编写yaml测试用例的方法
-
-1,  在step目录下新增一个测试步骤，参考HTest/content/step.png
-
-2,  在case目录下新增一个测试用例，参考HTest/content/case.png
-
-3,  在suit目录下新增一个测试用例集，参考HTest/content/suit.png
+（4）运行：hs -r  测试用例
 
 
-> 测试执行
+> 编写yaml测试用例流程
 
-1,  在HTest中修改setting文件，修改测试项目的绝对路径和用例名
+1,  首先创建一个空的项目project
 
-2,  执行方法: python -m HTest login_suit.yml
+2,  在config目录下创建配置文件，参考HTest/content/config.png
+
+3,  在step目录下新增一个测试步骤，参考HTest/content/step.png
+
+4,  在case目录下新增一个测试用例，参考HTest/content/case.png
+
+5,  在suit目录下新增一个测试用例集，参考HTest/content/suit.png
+
 
 

@@ -1,13 +1,17 @@
 #!/usr/bin/env python3.7
 # _*_ coding:utf-8 _*_
 # order by taolei
+import os
 import time
 import unittest
-from HTest import setting, yamlPage, HTMLTestRunner
+from operate import yamlPage
+from HTest import HTMLTestRunner, get_yaml
+
+TEST_REPORT = os.path.join(get_yaml().get('BASE_DIR'), "report")
 
 
 # 加载所在目录下py文件
-def add_case_py(test_path=setting.TEST_CASE_PY, result=True):
+def add_case_py(test_path=os.getcwd(), result=True):
     discover = unittest.defaultTestLoader.discover(test_path, pattern='test*.py')
     if result:
         return discover
@@ -24,7 +28,7 @@ def add_case_yaml():
 
 def run_case(case):
     now = time.strftime("%Y%m%d%H%M%S")
-    filename = setting.TEST_REPORT + '/' + now + '.html'
+    filename = TEST_REPORT + '/' + now + '.html'
     fp = open(filename, 'w', encoding='utf-8')
     runner = HTMLTestRunner(stream=fp, title='自动化测试报告', description='运行环境：Linux deepin， 浏览器：Chrome',
                             verbosity=2, tester='Tao lei')

@@ -1,83 +1,49 @@
 #!/usr/bin/env python3.7
 # _*_ coding:utf-8 _*_
 # 读取yaml文件
-import pprint
+import os
+import sys
 import yaml
 
+sys.path.append(os.path.dirname(__file__))
+path = os.path.join(os.path.dirname(__file__), "content", "data.yaml")
+if not os.path.exists(path):
+    os.system(r"touch {}".format(path))
 
-class Getyaml:
-    def __init__(self, filepath):
-        self.path = filepath
 
-    def get_yaml(self):
-        """
-        读取yaml文件
-        :return: Dict
-        order by taolei
-        """
-        f = open(self.path, encoding='utf-8')
-        data = yaml.load(f, Loader=yaml.FullLoader)
-        f.close()
-        return data
+def get_yaml():
+    """
+    读取yaml文件
+    :return: Dict
+    order by tao
+    """
+    f = open(path, encoding='utf-8')
+    data = yaml.load(f, Loader=yaml.FullLoader)
+    f.close()
+    return data
 
-    def write_yaml(self, data):
-        """
-        写入yaml文件
-        :param data: [{'database': 'Hs-api', 'port': 21020}, {'url': 'www.baidu.com'}]
-        """
-        with open(self.path, encoding='utf-8', mode='w') as f:
-            yaml.dump(data, stream=f, allow_unicode=True)
 
-    def alldata(self):
-        data = self.get_yaml()
-        return data
+def write_yaml(data):
+    """
+    写入yaml文件
+    :param data: [{'database': 'Hs-api', 'port': 21020}, {'url': 'www.baidu.com'}]
+    """
+    with open(path, encoding='utf-8', mode='w') as f:
+        yaml.dump(data, stream=f, allow_unicode=True)
 
-    def caselen1(self):
-        data = self.alldata()
-        length = len(data)
-        return length
 
-    def caselen(self, j):
-        data = self.alldata()
-        length = len(data[j]['test']['testcase'])
-        return length
-
-    def get_title(self, j):
-        data = self.alldata()
-        return data[j]['test']['testinfo'][0]['title']
-
-    def get_id(self, j):
-        data = self.alldata()
-        return data[j]['test']['testinfo'][0]['id']
-
-    def get_element_info(self, j, i):
-        data = self.alldata()
-        return data[j]['test']['testcase'][i]['element_info']
-
-    def get_find_type(self, j, i):
-        data = self.alldata()
-        return data[j]['test']['testcase'][i]['find_type']
-
-    def get_operate_type(self, j, i):
-        data = self.alldata()
-        return data[j]['test']['testcase'][i]['operate_type']
-
-    def get_info(self, j, i):
-        data = self.alldata()
-        return data[j]['test']['testcase'][i]['info']
-
-    def get_send_content(self, j, i):
-        data = self.alldata()
-        if self.get_operate_type(j, i) == 'send_key':
-            return data[j]['test']['testcase'][i]['send_content']
-        else:
-            pass
+def clear_yaml():
+    """
+    清除yaml文件
+    """
+    with open(path, mode='w', encoding='utf-8') as f:
+        f.truncate()
 
 
 if __name__ == '__main__':
-    f = "../Project/test_py/login_case.yml"
-    data = Getyaml(f).get_yaml()
-    pprint.pprint(data)
-    pprint.pprint(data.text)
-    print(Getyaml(f).caselen1())
-    print(f)
+    clear_yaml()
+    data0 = 'http://cd.sh.hang-shu.com:14528/zentao/user-login.html'
+    data1 = [['$args', '$username', '$password', '$check'], ['hs-input', 'id', 'account', '$username'], ['hs-input', 'name', 'password', '$password'], ['hs-click', 'id', 'submit'], ['hs-check', '$check']]
+    data2 = [['case1', 'l.tao', 'Aa123456', '密码错误，登录失败'], ['case2', 'w.tao', 'Aa123456', '用户名错误，登录失败'], ['case3', 'None', 'Aa123456', '登录失败，用户名不能为空'], ['case4', 'l.tao', 'None', '登录失败，密码不能为空'], ['case5', 'l.tao', 'l.tao@hang-shu.com', '登录成功']]
+    write_yaml({'url': data0, 'case-list': data1, 'main-list': data2})
+    print(get_yaml().get("main-list"))

@@ -1,21 +1,22 @@
 #!/usr/bin/env python3.7
 # _*_ coding:utf-8 _*_
-import os, sys
+
 import time
 import unittest
-from selenium.webdriver.common.by import By
+
 from ddt import ddt, data, unpack
 from selenium import webdriver
-from HTest import setting, BasePage, Getyaml
+from selenium.webdriver.common.by import By
+from HTest.get_yaml import get_yaml
+from HTest import BasePage
 from HTest.logger import logger
-sys.path.append(os.path.dirname(__file__))
 
-
-path_case = os.path.join(setting.TEST_CASE_YAML_CASE)
-path_suit = os.path.join(setting.TEST_CASE_YAML_SUIT)
-data_suit = Getyaml(path_suit).get_yaml().get("main-list")
-data_case = Getyaml(path_case).get_yaml().get("case-list")
-url = Getyaml(path_suit).get_yaml().get("url")
+data_suit = get_yaml().get("main-list")
+data_case = get_yaml().get("case-list")
+url = get_yaml().get("url")
+if data_suit is None or data_case is None or url is None:
+    logger.error("Testcase file content is incorrect")
+    exit(0)
 
 
 @ddt
@@ -24,8 +25,9 @@ class yamlPage(unittest.TestCase):
     value = value.split(',')[0].replace("'", "")
     修改用例名过长的问题
     在ddt.py中的mk_test_name方法中添加在倒数第三行
-    order by taolei
+    order by tao
     """
+
     def setUp(self) -> None:
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
@@ -35,25 +37,16 @@ class yamlPage(unittest.TestCase):
 
     @data(*data_suit)
     @unpack
-    def test_yml(self, args, username, password, check):
-        logger.debug("测试的用例是:{0} ; 用户名: {1} ; 密码: {2}".format(args, username, password))
+    def test_yml(self, *args):
+        logger.debug("测试的用例是:{0}".format(args[0]))
         for i in range(1, len(data_case)):          
             if data_case[i][0] == "hs-input":
                 if data_case[i][1] == "id":
-                    if "username" in data_case[i][3]:
-                        self.BasePage.input(username, By.ID, data_case[i][2])
-                    if "password" in data_case[i][3]:
-                        BasePage.input(password, By.ID, data_case[i][2])
+                    self.BasePage.input(args[i], By.ID, data_case[i][2])
                 if data_case[i][1] == "name":
-                    if "username" in data_case[i][3]:
-                        self.BasePage.input(username, By.NAME, data_case[i][2])
-                    if "password" in data_case[i][3]:
-                        self.BasePage.input(password, By.NAME, data_case[i][2])
+                    self.BasePage.input(args[i], By.NAME, data_case[i][2])
                 if data_case[i][1] == "xpath":
-                    if "username" in data_case[i][3]:
-                        self.BasePage.input(username, By.XPATH, data_case[i][2])
-                    if "password" in data_case[i][3]:
-                        self.BasePage.input(password, By.XPATH, data_case[i][2])
+                    self.BasePage.input(args[i], By.XPATH, data_case[i][2])
             if data_case[i][0] == 'hs-click':
                 if data_case[i][1] == "id":
                     self.BasePage.click(By.ID, data_case[i][2])
@@ -62,7 +55,7 @@ class yamlPage(unittest.TestCase):
                 if data_case[i][1] == "xpath":
                     self.BasePage.click(By.XPATH, data_case[i][2])
                 time.sleep(3)
-        logger.info("该条测试用例的执行结果是: " + check)
+        logger.info("该条测试用例的执行结果是: " + args[-1])
 
     def tearDown(self) -> None:
         self.driver.quit()

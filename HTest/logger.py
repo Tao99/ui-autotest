@@ -1,11 +1,13 @@
 #!/usr/bin/env python3.7
 # encoding: utf-8
 # 日志文件
-import logging
+
+import os
 import time
-import os, sys
-from HTest import setting
-sys.path.append(os.path.dirname(__file__))
+import logging
+from HTest.get_yaml import get_yaml
+
+LOG_DIR = os.path.join(get_yaml().get('BASE_DIR'), "logs")
 
 
 class Logger(object):
@@ -35,7 +37,7 @@ class Logger(object):
             %(message)s      用户输出的消息
 
         """
-        self.logname = os.path.join(setting.LOG_DIR, '%s.log' % time.strftime('%Y%m%d%H%M%S'))
+        self.logname = os.path.join(LOG_DIR, '%s.log' % time.strftime('%Y%m%d%H%M%S'))
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.DEBUG)
         # 日志输出格式
@@ -43,7 +45,7 @@ class Logger(object):
             '[%(asctime)s] [%(filename)s|%(funcName)s] [line:%(lineno)d] %(levelname)-8s: %(message)s')
 
     def __console(self, level, message):
-        if not os.path.isdir(setting.LOG_DIR):
+        if not os.path.isdir(LOG_DIR):
             print("Please specify new project first")
         else:
             # 创建一个FileHandler（文件输出），用于写到本地日志文件

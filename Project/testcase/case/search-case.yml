@@ -1,0 +1,10 @@
+config:
+
+# 调用的测试步骤模板
+import: login-step
+
+case-list:
+  - [$args, $input, $check]
+  - [hs-input, id, kw, $input]
+  - [hs-click, id, su]
+  - [hs-check, $check]

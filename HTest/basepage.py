@@ -1,16 +1,16 @@
 #!/usr/bin/env python3.7
 # encoding: utf-8
 # 二次封装常用函数库
+import os
+import sys
 import time
-from selenium.webdriver.support import expected_conditions as EC
+from random import choice
 from selenium.webdriver.common.action_chains import ActionChains
-import os, sys
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from HTest.logger import logger
-from selenium.webdriver.support.select import Select
-from selenium.webdriver.common.keys import Keys
-from random import choice
-sys.path.append(os.path.dirname(__file__))
 
 
 class BasePage(object):
@@ -28,21 +28,58 @@ class BasePage(object):
     def teardown(self):
         pass
 
+    @property
+    def get_title(self):
+        """
+        获取当前页面  title
+        :return:
+        """
+        title = self.driver.title
+        logger.debug(f"get current title {title}")
+        return title
+
+    @property
+    def get_url(self):
+        """
+        获取当前页面的URL
+        :return:
+        """
+        currentURL = self.driver.current_url
+        logger.debug(f"get current url {currentURL}")
+        return currentURL
+
+    @property
+    def get_url_html(self):
+        """
+        获取当前页面 html内容
+        :return:
+        """
+        sourceHtml = self.driver.page_source
+        return sourceHtml
+
+    def refresh(self):
+        """
+        刷新当前页面
+        :return:
+        """
+        logger.debug('refresh current page')
+        return self.driver.refresh()
+
     def forward(self):
         """
         浏览器前进操作
         :return:
         """
-        self.driver.forward()
         logger.info("Click forward on current content.")
+        return self.driver.forward()
 
     def back(self):
         """
         浏览器后退操作
         :return:
         """
-        self.driver.back()
         logger.info("Click back on current content.")
+        return self.driver.back()
 
     def wait(self, seconds):
         """
@@ -79,6 +116,14 @@ class BasePage(object):
         """
         self.driver.quit()
         logger.info('quit the browser')
+
+    def web_scroll_to_element(self, *selector):
+        """
+        滚动至元素element可见位置
+        :return:
+        """
+        target = self.find_element(*selector)
+        self.driver.execute_script("arguments[0].scrollIntoView();", target)
 
     # 查找元素
     def find_element(self, *selector):
@@ -250,6 +295,17 @@ class BasePage(object):
         """
         self.driver.switch_to_default_content()
 
+    def get_select_count(self, selector):
+        """
+        获取下拉选项的个数
+        :param selector:
+        :return:
+        """
+        element = self.find_element(*selector)
+        sel = Select(element)
+        options = sel.options
+        return options
+
     def select(self, id1):
         """
         处理标准下拉选择框,随机选择
@@ -282,6 +338,24 @@ class BasePage(object):
         """
         e1 = self.find_element(*selector)
         e1.send_keys(Keys.ENTER)
+
+    def up(self, selector):
+        """
+        模拟向上键
+        :param selector:
+        :return:
+        """
+        e1 = self.find_element(*selector)
+        e1.send_keys(Keys.UP)
+
+    def down(self, selector):
+        """
+        模拟向下键
+        :param selector:
+        :return:
+        """
+        e1 = self.find_element(*selector)
+        e1.send_keys(Keys.DOWN)
 
     def take_screenshot(self):
         """

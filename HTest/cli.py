@@ -3,7 +3,7 @@
 # 创建项目目录
 import argparse
 import os, sys
-from logger import logger
+from HTest.logger import logger
 sys.path.append(os.path.dirname(__file__))
 
 
@@ -26,7 +26,7 @@ def create_scaffold(project_path):
         (os.path.join(project_path, "testcase"), "folder"),
         (os.path.join(project_path, "testcase", "step"), "folder"),
         (os.path.join(project_path, "testcase", "case"), "folder"),
-        (os.path.join(project_path, "testcase", "suite"), "folder"),
+        (os.path.join(project_path, "testcase", "suit"), "folder"),
         (os.path.join(project_path, "config"), "folder"),
         (os.path.join(project_path, "report"), "folder"),
         (os.path.join(project_path, "logs"), "folder"),
@@ -50,21 +50,44 @@ def main_HTest():
         '-v', '--version', dest='version', action='store_true',
         help="show version")
     parser.add_argument(
-        '-s', '--startproject',
-        help="Specify new project name")
+        '-s', '--project',
+        help="Specify new project name.")
+    parser.add_argument(
+        '-r', '--testcase',
+        help="Run the test case.")
 
     args = parser.parse_args()
 
-    if args.version:
-        logger.error("{}".format("0.0.2"))
+    if len(sys.argv) == 1:
+        parser.print_help()
         exit(0)
-
-    if args.startproject:
-        project_path = os.path.join(os.getcwd(), args.startproject)
-        create_scaffold(project_path)
-        exit(0)
-        return project_path
 
     else:
-        logger.error("Please specify new project name first")
-        exit(0)
+        if args.version:
+            logger.error("{}".format("0.1.0"))
+            exit(0)
+
+        elif args.project:
+            project_path = os.path.join(os.getcwd(), args.project)
+            create_scaffold(project_path)
+            exit(0)
+
+        elif args.testcase and sys.argv[1] == "-r":
+            file_suffix = os.path.splitext(sys.argv[2])[1].lower()  # 获取文件后缀名
+            file = os.path.join(os.getcwd(), args.testcase)  # 获取执行文件
+            print(file)
+            if file_suffix in ['.yaml', '.yml']:
+                from testcase import get_data
+                get_data(file)
+                from run_yaml import test_yaml
+                test_yaml()
+            elif file_suffix == '.py':
+                from unittest.main import main
+                main(module=None)
+            else:
+                print("ModuleFoundError: Not supported %s" % file)
+            exit(0)
+
+        else:
+            logger.error("Please enter correct parameters")
+            exit(0)

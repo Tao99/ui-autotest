@@ -5,15 +5,16 @@ config:
   info: 禅道登陆用例集合 # 用例集合描述
 
 # 调用的测试用例模板
-import: [login-case]
+import: login-case
+
 # 测试url地址
-url: 'http://o.hang-shu.com/zentaopms/www/index.php'
+url: 'http://cd.sh.hang-shu.com:14528/zentao/user-login.html'
 
 # 用例集合，设计五条测试用例
 main-list:
-   - [case1, l.tao, Aa1234567, 密码错误，登录失败]
+   - [case1, l.tao, Aa123456, 密码错误，登录失败]
    - [case2, w.tao, Aa123456, 用户名错误，登录失败]
    - [case3, None, Aa123456, 登录失败，用户名不能为空]
    - [case4, l.tao, None, 登录失败，密码不能为空]
-   - [case5, l.tao, Aa123456, 登录成功]
+   - [case5, l.tao, l.tao@hang-shu.com, 登录成功]
 

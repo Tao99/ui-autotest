@@ -1,44 +1,44 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
 # 发送邮件
-import os, sys
-from logger import logger
-from HTest import setting, new_report
+
+import os
 import smtplib
+import sys
+import yaml
+from email import encoders
+from email.header import Header
+from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email import encoders
-from email.mime.base import MIMEBase
-from email.header import Header
+
+from HTest import new_report, get_yaml
+from HTest.logger import logger
+
 sys.path.append(os.path.dirname(__file__))
+EMAIL_DIR = os.path.join(get_yaml().get('BASE_DIR'), "config", "config.yaml")
+TEST_REPORT = os.path.join(get_yaml().get('BASE_DIR'), "report")
+
+
+def get_config(path):
+    f = open(path, encoding='utf-8')
+    data = yaml.load(f, Loader=yaml.FullLoader)
+    f.close()
+    return data
 
 
 def send_email(file):
     # 邮件配置
-    username_send = '1285642171@qq.com'  # 发件人
-    username_received = ['l.tao@hang-shu.com']  # 收件人多人
-    email_server = 'smtp.qq.com'  # 邮箱服务端url
-    username_code = 'bancxgdgvdevbafd'  # 邮箱授权码
-
-    """
-    # 邮件发送
-    content = "这是一份邮件"
-    email = MIMEText(content, 'plain', 'utf-8')  # 文本形式的邮件
-    email['Subject'] = '邮件主题'
-    email['From'] = username_send
-    email['To'] = ','.join(username_received)
-    # 图片文件附件
-    att1 = MIMEBase('application', 'octet-stream')
-    att1.set_payload(open("123.jpeg", 'rb').read())
-    att1.add_header('Content-Disposition', 'attachment', filename=Header('123.jpeg', 'gbk').encode())
-    encoders.encode_base64(att1)
-    email.attach(att1)
-    """
+    data = get_config(EMAIL_DIR).get("email", {})
+    username_send = data['FROM']  # 发件人
+    username_received = data['TO']  # 收件人可以是多人
+    email_server = data['HOST_SERVER']   # 邮箱服务端url
+    username_code = data['user_code']   # 邮箱授权码
 
     # 构造MIMEMultipart对象做为根容器
     email = MIMEMultipart()
     # 设置根容器属性
-    email['Subject'] = '自动化测试报告'
+    email['Subject'] = data['SUBJECT']
     email['From'] = username_send
     email['To'] = ','.join(username_received)
 
@@ -53,14 +53,16 @@ def send_email(file):
     email.attach(att)
 
     # 发邮件
-    smtp = smtplib.SMTP_SSL(email_server, port=465)
-    smtp.login(username_send, username_code)
-    smtp.sendmail(username_send, ','.join(username_received), email.as_string())
-    smtp.quit()
-    logger.info("测试报告已发送成功")
+    try:
+        smtp = smtplib.SMTP_SSL(email_server, port=465)
+        smtp.login(email['From'], username_code)
+        smtp.sendmail(email['From'], email['To'], email.as_string())
+        logger.info("测试报告已发送成功")
+        smtp.quit()
+    except Exception as e:
+        logger.error("邮件发送失败" + str(e))
 
 
 if __name__ == '__main__':
-    attr = os.path.join(setting.TEST_REPORT)
-    report = new_report(attr)
+    report = new_report(TEST_REPORT)
     send_email(report)

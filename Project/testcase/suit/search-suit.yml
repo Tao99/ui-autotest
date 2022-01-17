@@ -1,0 +1,15 @@
+config:
+  name: search-case
+  driver: HTest
+  driver-args: H5-ui
+  info: 百度
+
+url: 'https://www.baidu.com/'
+
+
+import: search-case
+
+main-list:
+  - [case1, 航数智能, 搜索航数智能]
+  - [case2, 航数, 搜索航数]
+  - [case3, 法院, 搜索法院]

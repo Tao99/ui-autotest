@@ -19,7 +19,9 @@ else:
     print(file)
     if file_suffix in ['.yaml', '.yml']:
         if os.path.isfile(sys.argv[1]):
-            from HTest.run_yaml import test_yaml
+            from testcase import get_data
+            get_data(file)
+            from run_yaml import test_yaml
             test_yaml()
         else:
             print("E" + "\n" + "======================================================================" + "\n" +

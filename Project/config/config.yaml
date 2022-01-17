@@ -1,0 +1,14 @@
+DB:
+  user: Hsapi
+  pwd: Hsapi-2021
+  host: 192.168.1.8
+  database: hs_dl
+  port: 21023
+
+
+email:
+  HOST_SERVER: smtp.qq.com
+  FROM: 1285642171@qq.com
+  TO: [l.tao@hang-shu.com, 503028909@qq.com]
+  user_code: bancxgdgvdevbafd
+  SUBJECT: 自动化测试报告

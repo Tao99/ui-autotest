@@ -1,0 +1,41 @@
+BASE_DIR: /home/hangshu/taolei/ui自动化框架/HS-V0.0.2/Project
+case-list:
+- - $args
+  - $username
+  - $password
+  - $check
+- - hs-input
+  - id
+  - account
+  - $username
+- - hs-input
+  - name
+  - password
+  - $password
+- - hs-click
+  - id
+  - submit
+- - hs-check
+  - $check
+main-list:
+- - case1
+  - l.tao
+  - Aa123456
+  - 密码错误，登录失败
+- - case2
+  - w.tao
+  - Aa123456
+  - 用户名错误，登录失败
+- - case3
+  - None
+  - Aa123456
+  - 登录失败，用户名不能为空
+- - case4
+  - l.tao
+  - None
+  - 登录失败，密码不能为空
+- - case5
+  - l.tao
+  - l.tao@hang-shu.com
+  - 登录成功
+url: http://cd.sh.hang-shu.com:14528/zentao/user-login.html
