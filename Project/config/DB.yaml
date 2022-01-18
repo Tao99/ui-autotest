@@ -1,6 +1,0 @@
-DB:
-  user: Hsapi
-  pwd: Hsapi-2021
-  host: 192.168.1.8
-  database: hs_dl
-  port: 21023
